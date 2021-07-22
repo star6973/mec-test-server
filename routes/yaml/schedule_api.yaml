@@ -1,5 +1,5 @@
 /restapi/schedule:
-  post:
+  get:
     tags:
       - 로봇 스케줄 API
     description: 관제에서 보내주는 schedule

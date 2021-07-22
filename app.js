@@ -11,7 +11,8 @@ const swaggerSpec = swaggerJSDoc({
     swaggerDefinition: yaml.load(path.join(appRoot, 'routes/yaml/swagger_api.yaml')),
     apis: [
         path.join(appRoot, 'routes/yaml/register_api.yaml'),
-        path.join(appRoot, 'routes/yaml/schedule_api.yaml')
+        path.join(appRoot, 'routes/yaml/schedule_api.yaml'),
+        path.join(appRoot, 'routes/yaml/arrival_api.yaml')
     ]
 })
 
@@ -54,7 +55,7 @@ app.post('/restapi/regiter', (req, res) => {
     res.send(register_data)
 })
 
-app.post('/restapi/schedule', (req, res) => {
+app.get('/restapi/schedule', (req, res) => {
     let today = new Date();
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1)
@@ -91,7 +92,7 @@ app.post('/restapi/schedule', (req, res) => {
     res.send(response_schedule_json)
 })
 
-app.post('/restapi/arrival', (req, res) => {
+app.get('/restapi/arrival', (req, res) => {
     let today = new Date();
     let response_arrival_json = JSON.parse(fs.readFileSync(path.join(appRoot, 'routes/json/arrival_success.json')))
     
