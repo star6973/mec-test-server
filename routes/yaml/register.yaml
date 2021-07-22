@@ -1,7 +1,7 @@
 /restapi/robot/v1/register:
   post:
     tags:
-      - register test
+      - 로봇 등록 API
     description: 로봇에서 등록하려는 register
     requestBody:
       content:
