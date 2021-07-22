@@ -4,7 +4,7 @@ info:
   description: Restful API Server
   version: 0.1.9
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:5000
 paths:
   schema:
     type: string

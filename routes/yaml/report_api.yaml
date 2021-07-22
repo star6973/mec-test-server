@@ -1,7 +1,7 @@
 /restapi/robot/v1/report:
   post:
     tags:
-      - report test
+      - 로봇 스케줄 API
     description: 관제에서 보내주는 report
     requestBody:
       content:

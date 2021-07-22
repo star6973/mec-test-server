@@ -9,10 +9,10 @@ const swaggerUI = require('swagger-ui-express')
 const swaggerJSDoc = require('swagger-jsdoc')
 const { report } = require('process')
 const swaggerSpec = swaggerJSDoc({
-    swaggerDefinition: yaml.load(path.join(appRoot, 'routes/yaml/swagger.yaml')),
+    swaggerDefinition: yaml.load(path.join(appRoot, 'routes/yaml/swagger_api.yaml')),
     apis: [
-        path.join(appRoot, 'routes/yaml/register.yaml'),
-        path.join(appRoot, 'routes/yaml/report.yaml')
+        path.join(appRoot, 'routes/yaml/register_api.yaml'),
+        path.join(appRoot, 'routes/yaml/report_api.yaml')
     ]
 })
 
