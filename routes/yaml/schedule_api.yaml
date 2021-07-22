@@ -1,8 +1,8 @@
-/restapi/robot/v1/report:
+/restapi/schedule:
   post:
     tags:
       - 로봇 스케줄 API
-    description: 관제에서 보내주는 report
+    description: 관제에서 보내주는 schedule
     requestBody:
       content:
         application/json:
