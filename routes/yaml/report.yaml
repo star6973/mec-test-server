@@ -1,0 +1,31 @@
+/restapi/robot/v1/report:
+  post:
+    tags:
+      - report test
+    description: 관제에서 보내주는 report
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["id", "status", "time"]
+            properties:
+              id:
+                type: string
+                example: "SeRo01"
+              status:
+                type: json
+                example:
+                  '{
+                    "location":"E1",
+                    "mode":"2",
+                    "starttime":"2021/07/22 12:20:00",
+                    "endtime":"2021/07/22 13:50:00"
+                  }'
+              time:
+                type: string
+                example: "2021/07/22 11:14:12"
+
+    responses:
+      200:
+        - application/json:

@@ -1,0 +1,10 @@
+openapi: 3.0.0
+info:
+  title: MEC 관제 테스트 서버 API
+  description: Restful API Server
+  version: 0.1.9
+servers:
+  - url: http://localhost:8080
+paths:
+  schema:
+    type: string

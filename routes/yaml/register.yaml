@@ -1,0 +1,31 @@
+/restapi/robot/v1/register:
+  post:
+    tags:
+      - register test
+    description: 로봇에서 등록하려는 register
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["register", "time"]
+            properties:
+              register:
+                type: json
+                example:
+                  '{
+                    "id":"SeRo01",
+                    "terminal":"P03",
+                    "zone":"1",
+                    "sort":"1",
+                    "desc":"방역 로봇"
+                  }'
+              time:
+                type: string
+                example:
+                  '{
+                    "2021/07/22 11:14:12"
+                  }'
+    responses:
+      200:
+        - application/json:
