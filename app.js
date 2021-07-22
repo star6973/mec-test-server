@@ -3,11 +3,10 @@ const yaml = require('yamljs')
 const path = require('path')
 const fs = require('fs')
 const appRoot = path.join(__dirname, "./.")
-const { base64encode, base64decode } = require('nodejs-base64')
+const base64encode = require('nodejs-base64')
 
 const swaggerUI = require('swagger-ui-express')
 const swaggerJSDoc = require('swagger-jsdoc')
-const { response } = require('express')
 const swaggerSpec = swaggerJSDoc({
     swaggerDefinition: yaml.load(path.join(appRoot, 'routes/yaml/swagger_api.yaml')),
     apis: [
@@ -24,6 +23,14 @@ let terminal_id = "P03"
 let zone_id = "1"
 let service_mode = "2"
 
+function getFormatYMD(date) {
+    return `${date.getFullYear().toString()}/${date.getMonth().toString().padStart(2, "0")}/${date.getDate().toString().padStart(2, "0")}`
+}
+
+function getFormatTime(date) {
+    return `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}`   
+}
+
 // middleware function
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
@@ -31,7 +38,7 @@ app.listen(port, () => {
     console.log("Start Rest Api Test Server Listening...")
 })
 
-app.post('/restapi/robot/v1/regiter', (req, res) => {
+app.post('/restapi/regiter', (req, res) => {
     let request_register_json = JSON.parse(JSON.stringify(req.body))
 
     robot_id = request_register_json.register.id
@@ -47,13 +54,13 @@ app.post('/restapi/robot/v1/regiter', (req, res) => {
     res.send(register_data)
 })
 
-app.post('/restapi/robot/v1/schedule', (req, res) => {
+app.post('/restapi/schedule', (req, res) => {
     let today = new Date();
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1)
 
-    let format_today = `${today.getFullYear().toString()}/${today.getMonth().toString().padStart(2, "0")}/${today.getDate().toString().padStart(2, "0")}`
-    let format_tomorrow = tomorrow.getFullYear().toString() + "/" + tomorrow.getMonth().toString().padStart(2, "0") + "/" + tomorrow.getDate().toString().padStart(2, "0")
+    let format_today = getFormatYMD(today)
+    let format_tomorrow = getFormatYMD(tomorrow)
 
     let response_schedule_json = JSON.parse(fs.readFileSync(path.join(appRoot, 'routes/json/schedule_success.json')))
     response_schedule_json.cmd.forEach((item) => {
@@ -77,11 +84,20 @@ app.post('/restapi/robot/v1/schedule', (req, res) => {
     })
 
     response_schedule_json.id = robot_id
-    response_schedule_json.time = `${today.getFullYear().toString()}/${today.getMonth().toString().padStart(2, "0")}/${today.getDate().toString().padStart(2, "0")} ${today.getHours().toString().padStart(2, "0")}:${today.getMinutes().toString().padStart(2, "0")}:${today.getSeconds().toString().padStart(2, "0")}`
+    response_schedule_json.time = `${getFormatYMD(today)} ${getFormatTime(today)}`
     response_schedule_json = JSON.stringify(response_schedule_json)
 
     res.setHeader('Content-Type', 'application/json;charset=utf-8')
     res.send(response_schedule_json)
 })
 
-app.post()
+app.post('/restapi/arrival', (req, res) => {
+    let today = new Date();
+    let response_arrival_json = JSON.parse(fs.readFileSync(path.join(appRoot, 'routes/json/arrival_success.json')))
+    
+    response_arrival_json.time = `${getFormatYMD(today)} ${getFormatTime(today)}`
+    response_arrival_json = JSON.stringify(response_arrival_json)
+
+    res.setHeader('Content-Type', 'application/json;charset=utf-8')
+    res.send(response_arrival_json)
+})
