@@ -1,0 +1,49 @@
+{
+    "cmd":[
+        {
+            "location":"E_202",
+            "mode":"2",
+            "starttime":"2021/07/22 20:17:00",
+            "endtime":"2021/07/22 20:18:00",
+            "type":"S"
+        },  
+        {
+             "location":"E_202",
+             "mode":"2",
+             "starttime":"2021/07/22 20:20:00",
+             "endtime":"2021/07/22 20:30:00",
+             "type":"I"
+        }
+    ],  
+    "arrival":[
+        {
+            "flightId":"KE123",
+            "airline":"대한항공",
+            "scheduleDateTime":"1250",
+            "estimatedDateTime":"1420",
+            "remark":"지연",
+            "airportCode":"AKL",
+            "terminalId":"P02",
+            "airport":"오클랜드",
+            "gatenumber":"110",
+            "carousel":"11",
+            "exitnumber":"A",
+            "elapsetime":"1220"
+        },  
+        {
+            "flightId":"OZ123",
+            "airline":"아시아나",
+            "scheduleDateTime":"1550",
+            "estimatedDateTime":"1620",
+            "remark":"도착",
+            "airportCode":"IN",
+            "terminalId":"P02",
+            "airport":"오클랜드",
+            "gatenumber":"110",
+            "carousel":"11",
+            "exitnumber":"A",
+            "elapsetime":"1220"
+        }
+    ],
+    "time": "2021/07/22 20:20:00"
+}
