@@ -1,4 +1,4 @@
-/restapi/robot/v1/register:
+/restapi/register:
   post:
     tags:
       - 로봇 등록 API
