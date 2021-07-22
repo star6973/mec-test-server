@@ -1,0 +1,22 @@
+/restapi/arrival:
+  get:
+    tags:
+      - 비행편 API
+    description: 관제에서 보내주는 비행편
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["id", "time"]
+            properties:
+              id:
+                type: string
+                example: "SeRo01"
+              time:
+                type: string
+                example: "2021/07/22 11:14:12"
+
+    responses:
+      200:
+        - application/json:
