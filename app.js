@@ -12,7 +12,7 @@ const swaggerSpec = swaggerJSDoc({
     swaggerDefinition: yaml.load(path.join(appRoot, 'routes/yaml/swagger_api.yaml')),
     apis: [
         path.join(appRoot, 'routes/yaml/register_api.yaml'),
-        path.join(appRoot, 'routes/yaml/report_api.yaml')
+        path.join(appRoot, 'routes/yaml/schedule_api.yaml')
     ]
 })
 
@@ -47,7 +47,7 @@ app.post('/restapi/robot/v1/regiter', (req, res) => {
     res.send(register_data)
 })
 
-app.post('/restapi/robot/v1/report', (req, res) => {
+app.post('/restapi/robot/v1/schedule', (req, res) => {
     let today = new Date();
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1)
@@ -55,8 +55,8 @@ app.post('/restapi/robot/v1/report', (req, res) => {
     let format_today = `${today.getFullYear().toString()}/${today.getMonth().toString().padStart(2, "0")}/${today.getDate().toString().padStart(2, "0")}`
     let format_tomorrow = tomorrow.getFullYear().toString() + "/" + tomorrow.getMonth().toString().padStart(2, "0") + "/" + tomorrow.getDate().toString().padStart(2, "0")
 
-    let response_report_json = JSON.parse(fs.readFileSync(path.join(appRoot, 'routes/json/report_success.json')))
-    response_report_json.cmd.forEach((item) => {
+    let response_schedule_json = JSON.parse(fs.readFileSync(path.join(appRoot, 'routes/json/schedule_success.json')))
+    response_schedule_json.cmd.forEach((item) => {
         [start_ymd, start_time] = item.starttime.split(" ")
         [start_y, start_m, start_d] = start_ymd.split("/")
         [end_ymd, end_time] = item.endtime.split(" ")
@@ -76,10 +76,12 @@ app.post('/restapi/robot/v1/report', (req, res) => {
         item.mode = service_mode
     })
 
-    response_report_json.id = robot_id
-    response_report_json.time = `${today.getFullYear().toString()}/${today.getMonth().toString().padStart(2, "0")}/${today.getDate().toString().padStart(2, "0")} ${today.getHours().toString().padStart(2, "0")}:${today.getMinutes().toString().padStart(2, "0")}:${today.getSeconds().toString().padStart(2, "0")}`
-    response_report_json = JSON.stringify(response_report_json)
+    response_schedule_json.id = robot_id
+    response_schedule_json.time = `${today.getFullYear().toString()}/${today.getMonth().toString().padStart(2, "0")}/${today.getDate().toString().padStart(2, "0")} ${today.getHours().toString().padStart(2, "0")}:${today.getMinutes().toString().padStart(2, "0")}:${today.getSeconds().toString().padStart(2, "0")}`
+    response_schedule_json = JSON.stringify(response_schedule_json)
 
     res.setHeader('Content-Type', 'application/json;charset=utf-8')
-    res.send(response_report_json)
+    res.send(response_schedule_json)
 })
+
+app.post()
